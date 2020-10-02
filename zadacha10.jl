@@ -15,11 +15,9 @@ function cross(r::Robot,sideV::HorizonSide,sideH::HorizonSide)  #H-horizontal,V-
         putmarker!(r)
         n+=1
     end
-    side1=reverse(sideH)
-    side2=reverse(sideV)
     for _ in 1:n
-        move!(r,side1)
-        move!(r,side2)
+        move!(r,reverse(sideH))
+        move!(r,reverse(sideV))
     end
     n=0
 end
