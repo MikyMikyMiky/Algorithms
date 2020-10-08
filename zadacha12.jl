@@ -44,14 +44,3 @@ function move_decart!(r,side)
     end
     move!(r,side)
 end
-
-inverse(side::HorizonSide) = HorizonSide(mod(Int(side)+2,4))
-
-function moves!(r,side)
-    num_steps=0
-    while isborder(r,side)==false
-        move!(r,side)
-        num_steps+=1
-    end
-    return num_steps
-end
