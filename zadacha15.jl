@@ -1,4 +1,4 @@
-function mark_perimetr(r::Robot)
+function mark_perimetr(r::Robot) 
     movements!(r,Nord)
     moves!(r,West)
     for side in (Sud,Ost,Nord,West)
