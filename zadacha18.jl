@@ -4,7 +4,7 @@ function mark_angles(r)
         push!(num_steps, moves!(r, West))
         push!(num_steps, moves!(r, Sud))
     end
-    for side in (Nord,Ost,Sud,West)
+    for side in (Nord,Ost,Sud,West) 
         moves!(r,side)
         putmarker!(r)
     end
