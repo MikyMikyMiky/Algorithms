@@ -5,7 +5,7 @@ function mark_cross(r)
     end
 end
 
-function move_if_possible!(r::Robot, side::HorizonSide)::Bool
+function move_if_possible!(r::Robot, side::HorizonSide)::Bool #функция похожа на ту, которую вы показывали на одной из лекций
     right_side = right(side)
     reverse_side = inverse(right_side)
     num_steps=0
