@@ -1,4 +1,4 @@
-function markersAllOver(r)
+function markersAllOver(r::Robot)
     mark_row(r,Ost)
     horizSide=Ost #horizSide-горизонтальная сторона (Ost или West)
     while isborder(r,horizSide)==false
