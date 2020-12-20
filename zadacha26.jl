@@ -2,7 +2,7 @@ function mark_lines!(r::Robot,typeOfLine::String,interval::Int) #typeOfLine - "s
     for side in (Sud,West)
         moves!(r,side)
     end
-    if typeOfLine=="straight"
+    if typeOfLine=="straight" #если надо прямые линии
         while isborder(r,Ost)==false
             putmarker!(r)
             while isborder(r,Nord)==false
@@ -18,7 +18,7 @@ function mark_lines!(r::Robot,typeOfLine::String,interval::Int) #typeOfLine - "s
             end
             moves!(r,Sud)
         end
-    elseif typeOfLine=="diagonal"
+    elseif typeOfLine=="diagonal"   #если надо косые линии
         n=0
         while isborder(r,Ost)==false
             putmarker!(r)
