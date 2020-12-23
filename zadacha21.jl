@@ -43,7 +43,6 @@ function movingHorizontally(r::Robot,lines::Lines,isHorizontalLine::Bool)
     elseif isHorizontalLine
         isHorizontalLine=false
         lines.Horizontal +=1
-        print("gay")
     end
     return(lines.Horizontal)
 end
