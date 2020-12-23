@@ -59,13 +59,3 @@ function bypassVerticalLine(r::Robot,side::HorizonSide)
         move!(r,Sud)
     end
 end
-
-inverse(side::HorizonSide) = HorizonSide(mod(Int(side)+2,4))
-
-right(side::HorizonSide) = HorizonSide(mod(Int(side)+3,4))
-
-function moves!(r,side)
-    while isborder(r,side)==false
-        move!(r,side)
-    end
-end
