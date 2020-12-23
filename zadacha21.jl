@@ -29,7 +29,7 @@ function countAnyLines(r::Robot)
                     move!(r,Sud)
                 end
                 bypassVerticalLine(r,side)
-                lines.Vertical +=1
+                lines.Vertical +=1 
             end
         end
     end
