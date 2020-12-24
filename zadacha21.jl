@@ -3,14 +3,14 @@ mutable struct Lines
     Vertical::Int
 end
 
+isHorizontalLine=false
+
 function countAnyLines(r::Robot)
-    for side in (West,Sud)
-        moves!(r,side)
-    end
+    goToStartingPoint(r)
     lines=Lines(0,0)
     side=Ost
     while (!(isborder(r,Nord)&&isborder(r,Ost))&&!(isborder(r,Nord)&&isborder(r,West))) #если ни в правом ни левом верхнем углу
-        lines.Horizontal=movingHorizontally(r,lines,false)
+        lines.Horizontal=movingHorizontally(r,lines)
         if !isborder(r,side)
             move!(r,side)
         else
@@ -28,8 +28,7 @@ function countAnyLines(r::Robot)
                 for _ in 1:steps
                     move!(r,Sud)
                 end
-                bypassVerticalLine(r,side)
-                lines.Vertical +=1 
+                lines.Vertical=bypassVerticalLine(r,side,lines)
             end
         end
     end
@@ -37,7 +36,8 @@ function countAnyLines(r::Robot)
     println(lines.Vertical)
 end
 
-function movingHorizontally(r::Robot,lines::Lines,isHorizontalLine::Bool)
+function movingHorizontally(r::Robot,lines::Lines)
+    global isHorizontalLine
     if isborder(r,Nord)
         isHorizontalLine=true
     elseif isHorizontalLine
@@ -47,14 +47,40 @@ function movingHorizontally(r::Robot,lines::Lines,isHorizontalLine::Bool)
     return(lines.Horizontal)
 end
 
-function bypassVerticalLine(r::Robot,side::HorizonSide)
+function bypassVerticalLine(r::Robot,side::HorizonSide,lines::Lines)
     n=0
     while isborder(r,side)
         move!(r,Nord)
         n +=1
     end
+    if n>1
+        lines.Vertical -=1
+    end
         move!(r,side)
     for _ in 1:n
         move!(r,Sud)
+    end
+    lines.Vertical +=1
+end
+
+function goToStartingPoint(r::Robot)
+    while (!(isborder(r,West)&&isborder(r,Sud)))
+        if !isborder(r,West)
+            move!(r,West)
+        else
+            n=0
+            while (!isborder(r,Nord)&&isborder(r,West))
+                move!(r,Nord)
+                n +=1
+            end
+            if isborder(r,West)
+                moves!(r,Sud)
+            else
+                move!(r,West)
+                for _ in 1:n
+                    move!(r,Sud)
+                end
+            end
+        end
     end
 end
